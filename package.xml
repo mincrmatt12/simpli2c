@@ -2,7 +2,7 @@
 <package>
   <name>simpli2c</name>
   <version>0.0.0</version>
-  <description>The simpli2c package</description>
+  <description>The simpli2c package provides an easy way to access i2c on linux devices reminiscent of the arduino Wire library </description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag --> 
   <!-- Example:  -->
@@ -40,7 +40,6 @@
   <!-- Use test_depend for packages you need only for testing: -->
   <!--   <test_depend>gtest</test_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
-
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>

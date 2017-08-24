@@ -15,9 +15,7 @@ namespace simpli2c {
     class Device {
     public:
         Device(uint8_t busnum, uint8_t address);
-
         Device(boost::filesystem::path i2cDevice, uint8_t address);
-
         Device(std::string i2cDevice, uint8_t address);
 
         void write(uint8_t value);
@@ -31,7 +29,12 @@ namespace simpli2c {
         uint8_t readOne();
 
         template<int N>
-        std::array<uint8_t, N> read();
+        std::array<uint8_t, N> read() {
+            auto array = new std::array<uint8_t, N>();
+            
+        }
+    private:
+        FILE* i2cDevice;
 
     };
 

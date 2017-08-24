@@ -7,7 +7,7 @@ project(simpli2c)
 find_package(catkin REQUIRED)
 
 ## System dependencies are found with CMake's conventions
-# find_package(Boost REQUIRED COMPONENTS system)
+find_package(Boost REQUIRED COMPONENTS filesystem)
 
 
 ## Uncomment this if the package has a setup.py. This macro ensures
@@ -97,7 +97,7 @@ find_package(catkin REQUIRED)
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES simpli2c
+   LIBRARIES simpli2c
 #  CATKIN_DEPENDS other_catkin_pkg
 #  DEPENDS system_lib
 )
@@ -108,17 +108,21 @@ catkin_package(
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
-# include_directories(include)
+include_directories(include)
+include_directories(${CATKIN_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
+
+add_compile_options("-std=c++14")
 
 ## Declare a C++ library
-# add_library(simpli2c
-#   src/${PROJECT_NAME}/simpli2c.cpp
-# )
+add_library(simpli2c
+        src/device.cpp
+        include/simpli2c/device.h
+        )
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
-# add_dependencies(simpli2c ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(simpli2c ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
 # add_executable(simpli2c_node src/simpli2c_node.cpp)
@@ -128,9 +132,9 @@ catkin_package(
 # add_dependencies(simpli2c_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(simpli2c_node
-#   ${catkin_LIBRARIES}
-# )
+target_link_libraries(simpli2c
+   ${catkin_LIBRARIES} ${Boost_LIBRARIES}
+)
 
 #############
 ## Install ##
@@ -147,18 +151,16 @@ catkin_package(
 # )
 
 ## Mark executables and/or libraries for installation
-# install(TARGETS simpli2c simpli2c_node
-#   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-#   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-#   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-# )
+install(TARGETS simpli2c
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+)
 
 ## Mark cpp header files for installation
-# install(DIRECTORY include/${PROJECT_NAME}/
-#   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
-#   FILES_MATCHING PATTERN "*.h"
-#   PATTERN ".svn" EXCLUDE
-# )
+install(DIRECTORY include/${PROJECT_NAME}/
+  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+  FILES_MATCHING PATTERN "*.h"
+)
 
 ## Mark other files for installation (e.g. launch and bag files, etc.)
 # install(FILES
