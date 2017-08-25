@@ -99,7 +99,7 @@ catkin_package(
 #  INCLUDE_DIRS include
    LIBRARIES simpli2c
 #  CATKIN_DEPENDS other_catkin_pkg
-#  DEPENDS system_lib
+   DEPENDS Boost
 )
 
 ###########
@@ -115,8 +115,8 @@ add_compile_options("-std=c++14")
 
 ## Declare a C++ library
 add_library(simpli2c
-        src/device.cpp
-        include/simpli2c/device.h
+        src/simpli2c.cpp
+        include/simpli2c/simpli2c.h
         )
 
 ## Add cmake target dependencies of the library
