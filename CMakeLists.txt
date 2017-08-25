@@ -96,7 +96,7 @@ find_package(Boost REQUIRED COMPONENTS filesystem)
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
+   INCLUDE_DIRS include
    LIBRARIES simpli2c
 #  CATKIN_DEPENDS other_catkin_pkg
    DEPENDS Boost
@@ -108,15 +108,13 @@ catkin_package(
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
-include_directories(include)
-include_directories(${CATKIN_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
+include_directories(include ${CATKIN_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
 
 add_compile_options("-std=c++14")
 
 ## Declare a C++ library
 add_library(simpli2c
         src/simpli2c.cpp
-        include/simpli2c/simpli2c.h
         )
 
 ## Add cmake target dependencies of the library
