@@ -17,6 +17,7 @@ namespace simpli2c {
         Device(uint8_t busnum, uint8_t address);
         Device(boost::filesystem::path i2cDevice, uint8_t address);
         Device(std::string i2cDevice, uint8_t address);
+        ~Device() {if (this->isOpen()) this->close_()}
 
         void open_();
         bool isOpen();
