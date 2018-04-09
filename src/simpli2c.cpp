@@ -94,4 +94,5 @@ void simpli2c::Device::requestMany(size_t paySize, uint8_t *payload, size_t resp
 
 void simpli2c::Device::close_() {
     close(this->i2cDevice);
+    this->i2cDevice = -1;
 }
